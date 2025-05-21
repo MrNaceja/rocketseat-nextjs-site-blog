@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 type Props = Omit<Post, '_id' | '_raw' | 'type' | 'body'>
-export const BlogCard = ({ slug, title, description, date, banner, author }: Props) => {
+export const PostCard = ({ slug, title, description, date, banner, author }: Props) => {
     return (
         <Link href={`/blog/${slug}`}>
             <article className="bg-gray-600 border border-gray-400 rounded-xl p-2 gap-4 flex flex-col group hover:border-blue-200 cursor-pointer">

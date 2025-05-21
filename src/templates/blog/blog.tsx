@@ -1,13 +1,17 @@
+'use client'
+
 import { Search } from "@/components/search"
-import { useRouter } from "next/router"
-import { BlogCard } from "./blog-card"
+import { PostCard } from "./post-card"
 import { Inbox } from "lucide-react"
-import { Props as BlogProps } from "@/pages/blog"
+import { Post } from "contentlayer/generated"
+import { useSearchParams } from "next/navigation"
 
-export const Blog = ({ posts }: BlogProps) => {
-    const router = useRouter()
-    const search = (router.query.search || '') as string
-
+type Props = {
+    posts: Post[]
+}
+export const Blog = ({ posts }: Props) => {
+    const search_params = useSearchParams()
+    const search = search_params?.get('search') || ''
     const title = search ? `Resultados de busca para "${search}"` : 'Dicas e estratégias para impulsionar seu negócio'
 
     const post_cards = posts.filter(blog => blog.title.toLowerCase().includes(search.toLowerCase()));
@@ -28,7 +32,7 @@ export const Blog = ({ posts }: BlogProps) => {
                     <main className="grid md:grid-cols-3 gap-6 flex-1">
                         {
                             post_cards.map(({ slug, title, description, banner, date, author, _id }) => (
-                                <BlogCard
+                                <PostCard
                                     key={_id}
                                     slug={slug}
                                     title={title}

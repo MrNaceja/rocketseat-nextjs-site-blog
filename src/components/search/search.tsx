@@ -1,12 +1,16 @@
+'use client'
+
 import { cn } from "@/lib/utils"
 import { CircleX, SearchIcon } from "lucide-react"
-import { useRouter } from "next/router"
-import { ChangeEvent, InputHTMLAttributes, useRef } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
+import { ChangeEvent, InputHTMLAttributes, useEffect, useRef } from "react"
 
 type Props = InputHTMLAttributes<HTMLInputElement>
 export const Search = ({ className, ...inputProps }: Props) => {
     const router = useRouter()
     const inputRef = useRef<HTMLInputElement>(null)
+    const search_params = useSearchParams();
+    const has_search = search_params?.has('search')
 
     const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -25,8 +29,7 @@ export const Search = ({ className, ...inputProps }: Props) => {
             url.searchParams.delete('search')
         }
 
-        router.push(url, undefined, {
-            shallow: true,
+        router.push(url.toString(), {
             scroll: false
         })
     }
@@ -38,6 +41,11 @@ export const Search = ({ className, ...inputProps }: Props) => {
         updateQuerySearch();
     }
 
+    useEffect(() => {
+        if ( has_search ) {
+            inputRef.current?.focus()
+        }
+    }, [has_search])
     return (
         <form className={cn("flex items-center px-4 py-3 rounded-lg border border-gray-400 gap-3 group focus-within:border-blue-300", className)}>
             <input

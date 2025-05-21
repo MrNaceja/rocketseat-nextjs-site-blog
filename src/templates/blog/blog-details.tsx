@@ -1,23 +1,22 @@
 import { Avatar } from "@/components/avatar"
 import { Markdown } from "@/components/markdown/markdown"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
-import { Button } from "@/components/ui/button"
-import { useShareProviders } from "@/hooks/use-share-providers"
-import { Props as BlogDetailsProps } from "@/pages/blog/[slug]"
-import { DynamicIcon } from "lucide-react/dynamic"
 import Image from "next/image"
 import Link from "next/link"
+import { PostShare } from "./post-share"
+import { Post } from "contentlayer/generated"
 
-export const BlogDetails = ({ post }: BlogDetailsProps) => {
-    const share_provider_options = useShareProviders({ url_share: `http://localhost:3000/blog/${post.slug}`, title: post.title });
-
+type Props = {
+    post: Post
+}
+export const BlogDetails = ({ post }: Props) => {
     return (
         <div className="flex flex-col container gap-14 pt-20 pb-32">
             <Breadcrumb className="w-fit">
                 <BreadcrumbList>
 
                     <BreadcrumbItem className="text-action-sm text-zinc-100">
-                        <BreadcrumbLink>
+                        <BreadcrumbLink asChild>
                             <Link href="/blog">
                                 Blog
                             </Link>
@@ -64,23 +63,7 @@ export const BlogDetails = ({ post }: BlogDetailsProps) => {
                         <Markdown content={post.body.raw} />
                     </div>
                 </article>
-
-                <aside className="flex flex-col gap-5">
-                    <h2 className="text-heading-xs text-gray-100">Compartilhar</h2>
-
-                    <ul className="w-fit md:w-full gap-2 flex md:flex-col">
-                        {
-                            share_provider_options.map((share_provider_option) => (
-                                <li key={share_provider_option.name} className="w-full">
-                                    <Button variant="outline" onClick={share_provider_option.action} className="w-fit md:w-full justify-start">
-                                        <DynamicIcon name={share_provider_option.icon} />
-                                        <span className="hidden md:block">{ share_provider_option.name }</span>
-                                    </Button>
-                                </li>
-                            ))
-                        }
-                    </ul>
-                </aside>
+                <PostShare postUrl={`http://localhost:3000/blog/${post.slug}`} postTitle={post.title}/>
             </main>
         </div>
     )
