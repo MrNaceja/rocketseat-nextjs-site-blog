@@ -1,14 +1,15 @@
 import { cn } from "@/lib/utils"
 import Link, { LinkProps } from "next/link"
-import { useRouter } from "next/router"
+import { usePathname } from "next/navigation"
 import { PropsWithChildren } from "react"
 
 type Props = PropsWithChildren<LinkProps & {
 
 }>
 export const ActiveLink = ({ children, href, ...linkProps }: Props) => {
-    const router = useRouter()
-    const isActive = router.asPath === href || router.asPath.startsWith(href.toString())
+    const linkPath = typeof href === 'string' ? href : href.pathname;
+    const pathname = usePathname();
+    const isActive = pathname === linkPath || pathname?.startsWith(`${linkPath}/`);
 
     return (
         <Link href={href} className={cn(

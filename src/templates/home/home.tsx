@@ -1,4 +1,4 @@
-import { CallToActionSection, FeatureSection, HeroSection, SupportSection, TestimonialsSection } from "./sections"
+import { FeatureSection, HeroSection, SupportSection, TestimonialsSection } from "./sections"
 
 export const Home = () => {
     return (
@@ -7,7 +7,6 @@ export const Home = () => {
             <FeatureSection />
             <SupportSection />
             <TestimonialsSection />
-            <CallToActionSection />
         </div>
     )
 }

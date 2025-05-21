@@ -1,10 +1,10 @@
 import Link from "next/link"
-import { Button } from "../../../../components/ui/button"
 import { ArrowRight, Store } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
-export const CallToActionSection = () => {
+export const CallToAction = () => {
     return (
-        <section className="py-32 relative">
+        <section className="py-32 relative w-full">
 
             <figure className="absolute inset-0 bg-no-repeat bg-cover bg-center bg-[url('/call-to-action-bg.svg')] opacity-90" />
             

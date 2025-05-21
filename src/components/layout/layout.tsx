@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react"
 
 import { Header } from "./header"
+import { CallToAction } from "./call-to-action";
 import { Footer } from "./footer"
 
 import { Inter, PT_Sans_Caption } from 'next/font/google';
@@ -20,11 +21,12 @@ const pt_sans_font = PT_Sans_Caption({
 type Props = PropsWithChildren
 export const Layout = ({ children }: Props) => {
     return (
-        <section className={`${inter_font.variable} ${pt_sans_font.variable} font-inter bg-gray-700 flex flex-col relative items-center justify-center`}>
+        <section className={`${inter_font.variable} ${pt_sans_font.variable} font-inter flex flex-col relative items-center justify-center min-h-screen`}>
             <Header />
-            <main className="flex-1 w-full">
+            <main className="flex-1 flex flex-col mt-24 w-full">
                 {children}
             </main>
+            <CallToAction />
             <Footer />
         </section>
     )
