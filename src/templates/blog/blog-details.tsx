@@ -63,7 +63,7 @@ export const BlogDetails = ({ post }: Props) => {
                         <Markdown content={post.body.raw} />
                     </div>
                 </article>
-                <PostShare postUrl={`http://localhost:3000/blog/${post.slug}`} postTitle={post.title}/>
+                <PostShare postUrl={`https://rocketseat-nextjs-site-blog-nrso.vercel.app/blog/${post.slug}`} postTitle={post.title}/>
             </main>
         </div>
     )
