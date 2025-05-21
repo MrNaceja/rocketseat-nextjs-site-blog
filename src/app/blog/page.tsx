@@ -1,7 +1,16 @@
 import { Blog } from "@/templates/blog"
 import { allPosts } from "contentlayer/generated"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: 'Blog',
+  description: 'Dicas e estratégias para impulsionar seu negócio',
+  openGraph: {
+    title: 'Blog',
+    description: 'Dicas e estratégias para impulsionar seu negócio',
+  }
+}
 
 export default async function BlogPage() {
-    const posts = allPosts
-    return <Blog posts={posts} />
+    return <Blog posts={allPosts} />
 }
